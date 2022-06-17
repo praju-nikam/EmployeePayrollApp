@@ -1,15 +1,16 @@
-// UC-9
 class EmployeePayrollData {
 
 
-    //getter and setter method
-    id() {
+    /**
+     * getter and setter method
+     */
+    get id() {
         return this._id = id;
     }
-    id(id) {
+    set id(id) {
         this._id = id;
     }
-    name() {
+    get name() {
         return this._name;
     }
     set name(name) {
@@ -18,16 +19,16 @@ class EmployeePayrollData {
             this._name = name;
         else throw 'Name is incorrect';
     }
-    profilePic() {
+    get profilePic() {
         return this._profilePic;
     }
-    profilePic(profilePic) {
+    set profilePic(profilePic) {
         this._profilePic = profilePic;
     }
-    gender() {
+    get gender() {
         return this._gender;
     }
-    gender(gender) {
+    set gender(gender) {
         this._gender = gender;
     }
     get department() {
@@ -52,14 +53,18 @@ class EmployeePayrollData {
         return this._startDate;
     }
     set startDate(startDate) {
-        let currentDate = new Date();
-        if (startDate > currentDate) {
-            throw "start date is a future date";
+            this._startDate = startDate;
         }
-        var diff = Math.abs(currentDate.getTime - startDate.getTime());
-        if (diff / (1000 * 60 * 60 * 24) > 30) {
-            throw 'start date is beyond 30 days'
-        }
-        this._startDate = startDate;
+        /**
+         * method
+         */
+    toString() {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const empDate = !this._startDate ? "undefined" :
+            this.startDate.toLocalDateString("en-US", options);
+        return "id=" + this.id + ",name='" + this.name + ", gender='" + this.gender +
+            ",profilePic='" + this.profilePic + ", department=" + this.department +
+            ", salary=" + this.salary + ", startDate=" + empDate + ", note=" + this.note;
     }
+
 }

@@ -1,23 +1,26 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    const name = document.querySelector("#name");
-    const textError = document.querySelector(".text-error");
-    name.addEventListener("input", function() {
+    const name = document.querySelector('#name');
+    const textError = document.querySelector('.text-error');
+    name.addEventListener('input', function() {
         if (name.value.length == 0) {
-            textError.textContent = " ";
-        } else {
-            try {
-                new EmployeePayrollData().name = name.value;
-                textError.textContent = " ";
-            } catch (e) {
-                textError.textContent = e;
-            }
+            textError.textContent = "";
+            return;
         }
+
+        try {
+            (new EmployeePayrollData()).name = name.value;
+
+            textError.textContent = "";
+        } catch (e) {
+            textError.textContent = e;
+        }
+
     });
 
-    const salary = document.querySelector("#salary");
-    const output = document.querySelector(".salary-output");
+    const salary = document.querySelector('#salary');
+    const output = document.querySelector('.salary-output');
     output.textContent = salary.value;
-    salary.addEventListener("input", function() {
+    salary.addEventListener('input', function() {
         output.textContent = salary.value;
     });
 });
@@ -49,7 +52,7 @@ const createEmployeePayroll = () => {
     employeePayrollData.salary = getInputValueById('#salary');
     employeePayrollData.note = getInputValueById('#notes');
     let date = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
-    employeePayrollData.startDate = new Date(Date.parse(date));
+    employeePayrollData.date = Date.parse(date);
     setTextValue('.date-error', e)
     employeePayrollData.date = Date.parse(date);
     alert(employeePayrollData.toString());
@@ -99,7 +102,7 @@ const resetForm = () => {
     setValue('#notes', '');
     setValue('#day', '1');
     setValue('#month', 'January');
-    setValue('#year', '2021');
+    setValue('#year', '2020');
 }
 
 const unsetSelectedValues = (propertyValue) => {
@@ -109,11 +112,12 @@ const unsetSelectedValues = (propertyValue) => {
     });
 }
 
-const setValue = (id, value) => {
-    const element = document.querySelector(id);
-    element.value = value;
-}
 const setTextValue = (id, value) => {
     const element = document.querySelector(id);
     element.textContent = value;
+}
+
+const setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value;
 }

@@ -113,3 +113,7 @@ const setValue = (id, value) => {
     const element = document.querySelector(id);
     element.value = value;
 }
+const setTextValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.textContent = value;
+}
